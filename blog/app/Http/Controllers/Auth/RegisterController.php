@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Zizaco\Entrust\EntrustRole;
 
 class RegisterController extends Controller
 {
@@ -69,4 +71,29 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+
+    public function store(Request $request)
+     {
+         $validator = Validator::make($request->all(),[
+             'name' => 'required|min:3|max:20',
+             'email' => 'required|email',
+             'password' => 'required|min:4',
+         ]);
+
+          if ($validator->fails()) {
+            return view('auth.adminRegister')->withErrors(['fail'=>'Email or password is wrong!']);
+          }
+
+         $user = User::create(request(['name', 'email', 'password']));
+         //make users login
+         auth()->login($user);
+         // return redirect()->route('test');
+         $owner = \App\Role::where('name','owner')->first();
+         // make users signup as admin or owner 
+         $user->attachRole($owner);
+
+         return view('test');
+     }
+
 }
