@@ -7,5 +7,11 @@ class Role extends EntrustRole
 {
 
   use EntrustUserTrait;
-  
+
+
+  public function users() {
+
+       return $this->belongsToMany('App\User');
+   }
+   
 }

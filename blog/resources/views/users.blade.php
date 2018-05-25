@@ -4,6 +4,12 @@
      <li class="nav-item">
          <a class="nav-link font-weight-bold" href="#">Hi {{ auth()->user()->name }}</a>
      </li>
+     @if($name == "admin")
+     <li class="nav-item">
+         <a class="nav-link font-weight-bold" href="{{ Route('user.show') }}">Edit User</a>
+     </li>
+     @endif
+
      <li class="nav-item">
          <a class="nav-link" href="{{ Route('login.logout') }}">Log Out</a>
      </li>

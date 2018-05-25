@@ -89,11 +89,18 @@ class RegisterController extends Controller
          //make users login
          auth()->login($user);
          // return redirect()->route('test');
-         $owner = \App\Role::where('name','owner')->first();
-         // make users signup as admin or owner 
-         $user->attachRole($owner);
+         $role = \App\Role::where('name',$request['role'])->first();
+         // make users signup as admin or owner
+         $user->attachRole($role);
 
-         return view('test');
+         if($user->hasRole(['owner', 'admin'])){
+           $role = true;
+           return view('home',$role);
+         }
+         else{
+           $role = false;
+           return view('home');
+         }
      }
 
 }

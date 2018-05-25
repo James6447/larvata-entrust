@@ -31,4 +31,10 @@ Route::get('/register/show',function (){
     return view('Auth.adminRegister');
 });
 
-Route::post('/new', ['as' => 'register.store', 'uses' => 'Auth\RegisterController@store']);
+Route::post('/home', ['as' => 'register.store', 'uses' => 'Auth\RegisterController@store']);
+
+//admin pages
+Route::get('/admin/show', ['as' => 'user.show', 'uses' => 'Admin\EdituserController@show']);
+Route::get('/admin/{id}/addAmin', ['as' => 'user.addAmin', 'uses' => 'Admin\EdituserController@admin']);
+Route::get('/admin/{id}/addOwn', ['as' => 'user.addOwn', 'uses' => 'Admin\EdituserController@owner']);
+Route::get('/admin/{id}/delete', ['as' => 'user.destroy', 'uses' => 'Admin\EdituserController@destroy']);

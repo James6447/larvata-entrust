@@ -70,11 +70,13 @@ class LoginController extends Controller
 
           //any role
           if ($attempt && $user->hasRole(['owner', 'admin']) ) {
-              return view('/test');
+              $name = ['name' => 'admin'];
+              return view('users',$name);
           }
 
           else if($attempt){
-              return view('/test');
+              $name = ['name' => 'user'];
+              return view('/users',$name);
           }
 
           // return Redirect::to('login/show')->withErrors(['fail'=>'Email or password is wrong!']);
@@ -91,7 +93,7 @@ class LoginController extends Controller
     {
       Auth::guard('web')->logout();
       // return redirect()->route('post.index');
-      return view('test');
+      return view('admin');
     }
 
 

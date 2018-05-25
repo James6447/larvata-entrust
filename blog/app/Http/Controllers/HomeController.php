@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Zizaco\Entrust\EntrustRole;
 
+
 class HomeController extends Controller
 {
 

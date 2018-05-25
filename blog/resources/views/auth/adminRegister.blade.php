@@ -20,6 +20,12 @@
         {{ Form::text('name') }}
         {{ Form::label('email', 'Email') }}
         {{ Form::text('email') }}
+        {{ Form::label('role', 'ADMIN') }}
+        {{ Form::radio('role','admin') }}
+        </br>
+        {{ Form::label('role', 'OWNER') }}
+        {{ Form::radio('role','owner') }}
+        </br>
         {{ Form::label('password', 'Password') }}
         {{ Form::password('password') }}
         <!-- {{ Form::label('comfirmemPass', 'confirmed Password') }}
