@@ -5,4 +5,12 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class Permission extends EntrustPermission
 {
+  use EntrustUserTrait;
+
+  protected $fillable = [
+      'name',
+      'display_name',
+      'description',
+  ];
+
 }

@@ -11,7 +11,7 @@ class EdituserController extends Controller
     {
       $users = \App\User::All();
       $data = compact('users');
-      return view('adminEdit',$data);
+      return view('admin.adminEdit',$data);
     }
 
 
@@ -19,17 +19,31 @@ class EdituserController extends Controller
     {
        $user = \App\User::Find($id);
        $role = \App\Role::where('name','=','admin')->first();
-       $user->attachRole($role);
-       return redirect()->route('user.show');
+
+       if($user->hasRole(['owner', 'admin'])) {
+         return redirect()->route('user.show')->withErrors(['fail'=> $user['name'].'Already Attached Role']);
+       }
+       else {
+         $user->attachRole($role);
+         return redirect()->route('user.show');
+       }
     }
+
 
     public function owner($id)
     {
        $user = \App\User::Find($id);
        $role = \App\Role::where('name','=','owner')->first();
-       $user->attachRole($role);
-       return redirect()->route('user.show');
+
+       if($user->hasRole(['owner', 'admin'])) {
+         return redirect()->route('user.show')->withErrors(['fail'=> $user['name'].'Already Attached Role']);
+       }
+       else {
+         $user->attachRole($role);
+         return redirect()->route('user.show');
+        }
     }
+
 
     public function destroy($id)
     {

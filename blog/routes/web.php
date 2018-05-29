@@ -34,7 +34,25 @@ Route::get('/register/show',function (){
 Route::post('/home', ['as' => 'register.store', 'uses' => 'Auth\RegisterController@store']);
 
 //admin pages
+Route::get('/admin/list',function (){
+    return view('admin.adminAbility');
+});
+
+
+//user Edit
 Route::get('/admin/show', ['as' => 'user.show', 'uses' => 'Admin\EdituserController@show']);
 Route::get('/admin/{id}/addAmin', ['as' => 'user.addAmin', 'uses' => 'Admin\EdituserController@admin']);
 Route::get('/admin/{id}/addOwn', ['as' => 'user.addOwn', 'uses' => 'Admin\EdituserController@owner']);
 Route::get('/admin/{id}/delete', ['as' => 'user.destroy', 'uses' => 'Admin\EdituserController@destroy']);
+
+//Role Edit
+Route::get('/show/role', ['as' => 'show.role', 'uses' => 'Admin\EditroleController@show']);
+Route::post('/create/role',['as' => 'create.role', 'uses' => 'Admin\EditroleController@create']);
+
+
+//permission Edit pages
+Route::get('/role/list', ['as' => 'role.list', 'uses' => 'Admin\EditpermissionController@show']);
+Route::get('/permission/{id}', ['as' => 'permission.list', 'uses' => 'Admin\EditpermissionController@list']);
+Route::get('/destroy/{id}/role', ['as' => 'role.destroy', 'uses' => 'Admin\EditpermissionController@destroy']);
+Route::get('/create/permission',['as' => 'create.permission', 'uses' => 'Admin\EditpermissionController@create']);
+Route::post('/permission/store',['as' => 'store.permission', 'uses' => 'Admin\EditpermissionController@store']);

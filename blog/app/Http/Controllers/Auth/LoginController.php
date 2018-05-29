@@ -93,7 +93,7 @@ class LoginController extends Controller
     {
       Auth::guard('web')->logout();
       // return redirect()->route('post.index');
-      return view('admin');
+      return view('users');
     }
 
 
