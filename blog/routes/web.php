@@ -56,3 +56,4 @@ Route::get('/permission/{id}', ['as' => 'permission.list', 'uses' => 'Admin\Edit
 Route::get('/destroy/{id}/role', ['as' => 'role.destroy', 'uses' => 'Admin\EditpermissionController@destroy']);
 Route::get('/create/permission',['as' => 'create.permission', 'uses' => 'Admin\EditpermissionController@create']);
 Route::post('/permission/store',['as' => 'store.permission', 'uses' => 'Admin\EditpermissionController@store']);
+Route::post('/update/permission',['as' => 'update.permission', 'uses' => 'Admin\EditpermissionController@update']);

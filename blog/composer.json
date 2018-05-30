@@ -12,7 +12,8 @@
         "laravelcollective/html": "^5.3.0",
         "recca0120/laravel-tracy": "^1.8",
         "spatie/laravel-menu": "^3.1",
-        "zizaco/entrust": "5.2.x-dev"
+        "zizaco/entrust": "5.2.x-dev",
+        "illuminate/html": "5.*"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

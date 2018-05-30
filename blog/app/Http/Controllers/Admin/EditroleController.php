@@ -9,6 +9,8 @@ use Zizaco\Entrust\EntrustRole;
 use Illuminate\Support\Facades\Hash;
 
 
+
+
 class EditroleController extends Controller
 {
     public function show(){

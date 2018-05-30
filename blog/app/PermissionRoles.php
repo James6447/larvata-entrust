@@ -10,4 +10,7 @@ class PermissionRoles extends Model
   protected $table = "permission_role";
 
 
+  function role(){
+    return $this->belongsToMany('App\Role');
+  }
 }

@@ -89,9 +89,9 @@ class RegisterController extends Controller
          //make users login
          auth()->login($user);
          // return redirect()->route('test');
-         // $role = \App\Role::where('name',$request['role'])->first();
+         $role = \App\Role::where('name',$request['role'])->first();
          // make users signup as admin or owner
-         // $user->attachRole($role);
+         $user->attachRole($role);
 
          return view('home');
 

@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Zizaco\Entrust\EntrustRole;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+
 
 class EditpermissionController extends Controller
 {
     public function show()
     {
         $role = \App\Role::All();
-        $permission = \App\Role::All();
+        $permission = \App\Permission::All();
         $data = compact('role');
         $data2 = compact('permission');
         return view('admin.roleList',$data,$data2);
@@ -30,11 +32,7 @@ class EditpermissionController extends Controller
                               ->get();
         $permissions = \App\Permission::All();
 
-        $data = compact('role');
-        $data2 = compact('permission_role');
-        $data3 = compact('permissions');
-
-        return view('admin.rolePermission',$data3,$data2);
+        return view('admin.rolePermission',compact('role','permission_role','permissions'));
     }
 
 
@@ -72,8 +70,21 @@ class EditpermissionController extends Controller
 
     }
 
-    public function update()
+    public function update(request $request)
     {
+
+        $drop = DB::table('permission_role')->where('role_id',$request['role'])->delete();;
+        $role = \App\Role::where('id',3)->first();
+
+        $ability = $request['permission'];
+        $count = count($ability);
+
+        for($i=0; $i < $count ; $i++){
+          $permission = \App\Permission::where('id',$ability[$i])->first();
+          $role->attachPermission($permission);
+        }
+
+        return redirect()->route('role.list');
 
     }
 
@@ -84,7 +95,6 @@ class EditpermissionController extends Controller
         $role->delete();
         return redirect()->route('role.list');
     }
-
 
 
 

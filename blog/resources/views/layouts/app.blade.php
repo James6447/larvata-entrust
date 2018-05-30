@@ -16,10 +16,54 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
-    
+
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+    <script src="{{ asset('js/jquery-ui.js') }}" defer type="text/javascript"></script>
+
+    <script>
+    	$(function() {
+    	  $("#sortable1, #sortable2")
+    	    .sortable({
+    	    connectWith: ".connectedSortable"
+    	  })
+    	    .disableSelection();
+    	});
+
+    	function submit() {
+    	  var idsInOrder = $("#sortable2").sortable("toArray", { attribute: "id" });
+    	  alert(idsInOrder);
+    	}
+
+      function post() {
+        var temp = document.createElement("form");
+        var idsInOrder = $("#sortable2").sortable("toArray", { attribute: "id" });
+
+        temp.action = "http://localhost:8000/update/permission";
+        temp.method = "post";
+        temp.style.display = "none";
+
+        // var role_id = document.createElement("textarea");
+        // opt.name = 'role';
+        // opt.value = 3;
+        // temp.appendChild(role_id);
+
+        for (var x in idsInOrder) {
+          var opt = document.createElement("textarea");
+          opt.name = x;
+          opt.value = idsInOrder[x]; // alert(opt.name)
+          temp.appendChild(opt);
+          }
+        document.body.appendChild(temp);
+        temp.submit(); return temp;
+      }
+
+    </script>
+
+
 </head>
 <body>
     <div id="app">
