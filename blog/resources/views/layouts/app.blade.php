@@ -33,36 +33,29 @@
     	    .disableSelection();
     	});
 
+
     	function submit() {
-    	  var idsInOrder = $("#sortable2").sortable("toArray", { attribute: "id" });
+    	  var idsInOrder = $("#sortable1").sortable("toArray", { attribute: "id" });
     	  alert(idsInOrder);
     	}
 
-      function post() {
+
+      function post(id) {
         var temp = document.createElement("form");
-        var idsInOrder = $("#sortable2").sortable("toArray", { attribute: "id" });
+        var idsInOrder = $("#sortable1").sortable("toArray", { attribute: "id" });
 
-        temp.action = "http://localhost:8000/update/permission";
-        temp.method = "post";
-        temp.style.display = "none";
-
-        // var role_id = document.createElement("textarea");
-        // opt.name = 'role';
-        // opt.value = 3;
-        // temp.appendChild(role_id);
-
-        for (var x in idsInOrder) {
-          var opt = document.createElement("textarea");
-          opt.name = x;
-          opt.value = idsInOrder[x]; // alert(opt.name)
-          temp.appendChild(opt);
-          }
-        document.body.appendChild(temp);
-        temp.submit(); return temp;
+        // alert(idsInOrder);
+        var form = '<form id="dynForm" action="http://localhost:8000/update/permission" method="post">' ;
+          form = form + '<input type="hidden" name="role" value="'+id+'">';
+        for (var i = 0; i < idsInOrder.length; i++) {
+          form = form + '<input type="hidden" name="permission[]" value="'+idsInOrder[i]+'">';
+        }
+        form = form +'<input type="hidden" name="_token" value="{{ csrf_token() }}"></form>';
+        document.body.innerHTML += form;
+        document.getElementById("dynForm").submit();
       }
 
     </script>
-
 
 </head>
 <body>

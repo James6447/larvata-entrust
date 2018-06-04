@@ -24,5 +24,6 @@
 
                 {{ Form::submit('Submit') }}
                 {{ Form::close() }}
+                <a href="/admin/list">BACK</a>
 
 @endsection

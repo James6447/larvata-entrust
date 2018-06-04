@@ -10,7 +10,7 @@
                 <li><a href="{{ Route('show.role') }}">Create a Role</a></li>
                 <li><a href="{{ Route('create.permission') }}">Create a Permission</a></li>
                 <li><a href="{{ Route('role.list') }}">Manage Role Permission</a></li>
-                
+                <li><a href="{{ Route('user.show') }}">Edit User</a></li>
 
 
 @endsection

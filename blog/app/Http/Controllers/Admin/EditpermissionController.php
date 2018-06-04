@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use Zizaco\Entrust\EntrustRole;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use Laravel\Illuminate\Cookies\CookieServiceProvider;
+use Laravel\Illuminate\Session\Middleware\StartSession;
 
 
 class EditpermissionController extends Controller
@@ -59,33 +61,36 @@ class EditpermissionController extends Controller
       $permission = \App\Permission::create(request(['name', 'display_name', 'description']));
       //count how many role selected
       $ability = $request['role'];
-      $count = count($ability);
 
-      for ($i=0; $i < $count ; $i++) {
-        $role = \App\Role::where('id',$ability[$i])->first();
-        $role->attachPermission($permission);
+      if($ability != 0){
+        $count = count($ability);
+
+        for ($i=0; $i < $count ; $i++) {
+          $role = \App\Role::where('id',$ability[$i])->first();
+          $role->attachPermission($permission);
+        }
       }
-
       return redirect()->route('create.permission');
-
     }
+
 
     public function update(request $request)
     {
 
         $drop = DB::table('permission_role')->where('role_id',$request['role'])->delete();;
-        $role = \App\Role::where('id',3)->first();
+        $role = \App\Role::where('id',$request['role'])->first();
 
         $ability = $request['permission'];
-        $count = count($ability);
 
-        for($i=0; $i < $count ; $i++){
-          $permission = \App\Permission::where('id',$ability[$i])->first();
-          $role->attachPermission($permission);
+        if($ability != 0){
+          $count = count($ability);
+
+          for($i=0; $i < $count ; $i++){
+            $permission = \App\Permission::where('id',$ability[$i])->first();
+            $role->attachPermission($permission);
+          }
         }
-
         return redirect()->route('role.list');
-
     }
 
 

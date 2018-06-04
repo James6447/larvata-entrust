@@ -35,13 +35,14 @@ class EditroleController extends Controller
       $role = \App\Role::create(request(['name', 'display_name', 'description']));
       // count how many permission selected
       $ability = $request['permission'];
-      $count = count($ability);
 
-      for ($i=0; $i < $count ; $i++) {
-        $permission = \App\Permission::where('id',$ability[$i])->first();
-        $role->attachPermission($permission);
+      if($ability != 0){
+        $count = count($ability);
+        for ($i=0; $i < $count ; $i++) {
+          $permission = \App\Permission::where('id',$ability[$i])->first();
+          $role->attachPermission($permission);
+        }
       }
-
       return view('admin.adminAbility');
     }
 }
