@@ -17,6 +17,14 @@
     font-size: 1.2em;
     width: 120px;
   }
+
+  li{
+    cursor:  move;
+  }
+
+  li:hover{
+    transform: scale(1.1);
+  }
 </style>
 
 
