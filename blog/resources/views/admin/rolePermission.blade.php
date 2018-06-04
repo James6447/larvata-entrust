@@ -28,10 +28,10 @@
 </style>
 
 
-<?php
+@php
 $i=0;
 $compare=[0];
-?>
+@endphp
 
 @section('content')
 <div class="container">
@@ -39,7 +39,7 @@ $compare=[0];
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Dashboard</div>
-                          <h1>Role{{ $role->name }}</h1>
+                          <h1>Role:{{ $role->name }}</h1>
                 <div class="card-deck">
 
                   <div class="card">
@@ -48,7 +48,8 @@ $compare=[0];
 
                         @foreach($permission_role as $permission)
                   	      <li id="{{ $permission->id }}" class="ui-state-default">{{ $permission -> display_name}}</li>
-                          <?php $compare[$i++] = $permission->id ?>
+                          @php $compare[$i++] = $permission->id
+                          @endphp
                         @endforeach
                   	   </ul>
                    </div>
